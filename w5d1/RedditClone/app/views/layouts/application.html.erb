@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RedditClone</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <% if current_user %>
+    <%= current_user.email %><br>
+    <%= link_to 'Sign Out', '/session', method: :delete %>
+  <% else %>
+    <%= link_to 'Sign Up', new_user_url, method: :get %>
+    <%= link_to 'Sign In', new_session_url, method: :get %>
+  <% end %>
+<br>
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <%= error %><br>
+  <% end %>
+<% elsif flash.now[:errors] %>
+  <% flash.now[:errors].each do |error| %>
+    <%= error %><br>
+  <% end %>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>

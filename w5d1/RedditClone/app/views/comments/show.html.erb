@@ -1,0 +1,23 @@
+<h2>Comment</h2>
+
+<%= 'Comment for ' + @comment.post.title %><br>
+<%= 'Author : ' + @comment.author.email %><br>
+<%= @comment.content %><br>
+
+
+<p>Reply to this comment</p>
+<form action='/comments' method="post">
+
+  <%= auth_token %>
+
+  <label for="content"></label>
+  <textarea id="content" name="comment[content]" rows="8" cols="40"></textarea>
+
+  <input type="hidden" name="comment[post_id]" value="<%= @comment.post_id %>">
+  <br>
+
+  <input type="hidden" name="comment[parent_comment_id]" value="<%= @comment.id %>">
+
+  <input type="submit" value="Add Comment">
+
+</form>
